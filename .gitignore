@@ -5,7 +5,7 @@
 /logs/*
 /tmp/*
 /vendor/*
-./.env
+.env
 
 # OS generated files #
 ######################
