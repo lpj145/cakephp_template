@@ -37,7 +37,7 @@ class UsersController extends AppController
                 'exp' => $expireTime
             ],Security::getSalt());
 
-            return $this->withJson([
+            return $this->responseJson([
                 'token_type' => 'bearer',
                 'token' => $tokenJwt,
                 'token_expire' => $expireTime,
