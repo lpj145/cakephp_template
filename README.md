@@ -1,53 +1,82 @@
-# CakePHP Application Skeleton
+# CakePHP App Template
 
-[![Build Status](https://img.shields.io/travis/cakephp/app/master.svg?style=flat-square)](https://travis-ci.org/cakephp/app)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%207-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
+Visando diminuir o bootstrap de um projeto inicial, especialmente feito para api,
+baseado em ``tokens`` de serviços para consumo, um projeto poderá ser facilmente
+implantado e já iniciado com algumas configurações básicas, aproveite! 
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 4.x.
+## Instalação
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
-
-## Installation
-
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
-
-If Composer is installed globally, run
+Lembre-se de já estar com o composer instalado e configurado no seu ambiente.
 
 ```bash
-composer create-project --prefer-dist cakephp/app
+git clone https://github.com/lpj145/cakephp_template.git nome_do_projeto
 ```
 
 In case you want to use a custom app dir name (e.g. `/myapp/`):
 
 ```bash
-composer create-project --prefer-dist cakephp/app myapp
+cd nome_do_projeto
+composer install
+bin/cake install //Isso irá instalar qualquer coisa que a aplicação precise, incluindo, rodar migrations.
 ```
 
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
+Para rodar uma prévia do que é o template, execute:
 
 ```bash
-bin/cake server -p 8765
+bin/cake server -p 8000
 ```
 
-Then visit `http://localhost:8765` to see the welcome page.
+Deve esta disponivel em: `http://localhost:8000`
 
-## Update
+## Comandos
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
+````bash
+install
+````
+Esse comando é um facilitador, coloque dentro dele
+qualquer coisa relacionada ao deploy de sua aplicação
+isso facilitará num deploy não precisar configurar muitas coisas,
+ou até mesmo inserir dados manualmente, tenha sempre em mente, que se,
+alguma parte do programa necessite executar algo aqui sempre comece o nome da função,
+ou o arquivo do contexto com o nome ``install`` isso o ajudará a se lembrar onde isso é executado/lido/tratado.
 
-## Configuration
+````bash
+create_user %name %last_name %username %password ?role
+````
 
-Read and edit the environment specific `config/app_local.php` and setup the 
-`'Datasources'` and any other configuration relevant for your application.
-Other environment agnostic settings can be changed in `config/app.php`.
+Comando para criação de usuários, tente adicionar um, e depois
+faça um post para ``/token``, caso ocorra tudo bem, você deverá receber um token
+e mais alguns dados com detalhes.
 
-## Layout
+## Recursos
 
-The app skeleton uses [Milligram](https://milligram.io/) (v1.3) minimalist CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
+``/token - Endpoint``
+````json
+{
+  "username": "email@example.com",
+  "password": "youpwdhere"
+}
+````
+
+``/companies - Endpoint``
+````json
+{
+  "name": "NomedaCompanhiaAqui"
+}
+````
+
+## Detalhes
+
+Deve se notar um middleware chamado ``PersistenceOrmMiddleware`` ele
+será sempre o responsável por tratar dados entrante na api, como caso de,
+criação e atualização de um recurso, ele tenta executar o contexto da requisição
+pedida, e caso "excute" ``PersistenceException`` ou `ValidationException` ele retornará
+uma estrutra bem de errors do recurso.
+
+## Configuração
+Sempre que você quiser editar as configurações, tenha em mente, que no seu
+ambiente de desenvolvimento, o arquivo correto para edição é `config/app_local.php`,
+você deve sempre se lembrar de ativar e configurar o banco de dados, com a chave `'Datasource'`
+toda a configuração de uma aplicação pode ficar em ambientes de variaveis, ou simplesmente,
+defina um arquivo .env na pasta raiz da aplicação.
+Toda configuração agnostica ao ambiente, deve ficar em `config/app.php`

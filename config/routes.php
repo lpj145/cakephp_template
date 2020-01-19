@@ -34,8 +34,6 @@ $routes->scope('/', function (RouteBuilder $builder) {
     $builder->registerMiddleware('bodyparser', \Cake\Http\Middleware\BodyParserMiddleware::class);
     $builder->applyMiddleware('bodyparser');
 
-    $builder->get('/ping', ['controller' => 'Ping', 'action' => 'index']);
-
     $builder->post('/token', ['controller' => 'Users', 'action' => 'token']);
 
     // Companies Routes
@@ -48,10 +46,6 @@ $routes->scope('/', function (RouteBuilder $builder) {
     $builder->patch('/companies/:id/active', ['controller' => 'Companies', 'action' => 'active'])
         ->setPass(['id'])
     ;
-
-    if (Configure::read('debug')) {
-        $builder->get('/debug', ['controller' => 'App', 'action' => 'debug']);
-    }
 
     $builder->fallbacks();
 });
