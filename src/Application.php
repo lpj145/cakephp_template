@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace App;
 
-use App\Middleware\PersistenceOrmMiddleware;
+use App\Middleware\PersistenceOrmFailedMiddleware;
 use Authentication\AuthenticationService;
 use Authentication\AuthenticationServiceInterface;
 use Authentication\AuthenticationServiceProviderInterface;
@@ -134,7 +134,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                     ;
             })
             ->add($authenticationMiddleware)
-            ->add(new PersistenceOrmMiddleware())
+            ->add(new PersistenceOrmFailedMiddleware())
         ;
 
 

@@ -18,10 +18,7 @@ namespace App\Controller;
 
 use Authentication\Controller\Component\AuthenticationComponent;
 use Cake\Controller\Controller;
-use Cake\Core\Configure;
-use Cake\Datasource\EntityInterface;
 use Cake\Datasource\InvalidPropertyInterface;
-use Cake\Event\EventInterface;
 
 /**
  * Ponto inicial de todos os controles
@@ -48,22 +45,12 @@ class AppController extends Controller
      * @param int $code
      * @return \Cake\Http\Response
      */
-    protected function withJson($json, int $code = 200)
+    protected function responseJson($json, int $code = 200)
     {
         return $this->response
             ->withStatus($code)
             ->withType('application/json')
             ->withStringBody(json_encode($json));
-    }
-
-    /**
-     * Mostrar barra debug
-     * @return \Cake\Http\Response
-     */
-    public function debug()
-    {
-        return $this->response
-            ->withStringBody('Check debugbar info.');
     }
 
     protected function responseWithSuccess($data, $additional = [], $meta = [])
@@ -80,7 +67,7 @@ class AppController extends Controller
             $result['meta'] = $meta;
         }
 
-        return $this->withJson($result);
+        return $this->responseJson($result);
     }
 
     /**
@@ -97,7 +84,7 @@ class AppController extends Controller
         int $status = 400
     )
     {
-        return $this->withJson([
+        return $this->responseJson([
             'errors' => $entity->getInvalid(),
             'messages' => $entity->getErrors(),
             'message' => $message,

@@ -10,12 +10,13 @@ namespace App\Exception;
 
 
 use Cake\Datasource\EntityInterface;
+use Cake\ORM\Entity;
 use Throwable;
 
 class PersistenceException extends \RuntimeException
 {
     /**
-     * @var EntityInterface
+     * @var Entity
      */
     private $entity;
 
@@ -41,6 +42,9 @@ class PersistenceException extends \RuntimeException
         return $this->entity->getInvalid();
     }
 
+    /**
+     * @return Entity
+     */
     public function getEntity()
     {
         return $this->entity;

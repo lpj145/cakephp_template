@@ -64,6 +64,11 @@ trait CreateRecordTrait
         return $entity;
     }
 
+    /**
+     * @param EntityInterface $entity
+     * @param string $propertyName
+     * @return EntityInterface
+     */
     protected function setUuidIfNull(EntityInterface $entity, string $propertyName = 'id')
     {
         if (is_null($entity->get($propertyName))) {

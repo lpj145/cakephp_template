@@ -5,17 +5,17 @@ namespace App\Middleware;
 
 use App\Exception\PersistenceException;
 use App\Exception\ValidationException;
-use Cake\Datasource\EntityInterface;
 use Cake\Http\Response;
+use Cake\ORM\Entity;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
- * PersistenceOrm middleware
+ * PersistenceOrmFailed middleware
  */
-class PersistenceOrmMiddleware implements MiddlewareInterface
+class PersistenceOrmFailedMiddleware implements MiddlewareInterface
 {
     /**
      * Process method.
@@ -41,7 +41,7 @@ class PersistenceOrmMiddleware implements MiddlewareInterface
         }
     }
 
-    protected function responseWithErrors(EntityInterface $entity, string $message = '', $meta = null)
+    protected function responseWithErrors(Entity $entity, string $message = '', $meta = null)
     {
         $result = [
             'invalids' => $entity->getInvalid(),

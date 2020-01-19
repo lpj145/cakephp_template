@@ -67,7 +67,7 @@ e mais alguns dados com detalhes.
 
 ## Detalhes
 
-Deve se notar um middleware chamado ``PersistenceOrmMiddleware`` ele
+Deve se notar um middleware chamado ``PersistenceOrmFailedMiddleware`` ele
 será sempre o responsável por tratar dados entrante na api, como caso de,
 criação e atualização de um recurso, ele tenta executar o contexto da requisição
 pedida, e caso "excute" ``PersistenceException`` ou `ValidationException` ele retornará
