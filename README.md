@@ -33,8 +33,11 @@ Antes de rodar este comando configure o `.env` na raiz do projeto, tente apenas 
 ````bash
 docker-compose up --build
 ````
+
 mariadb - `localhost:${DATABASE_PORT}`
+
 adminer - `localhost:9200`
+
 cakeapi - `localhost:9090`
 
 ## Comandos
