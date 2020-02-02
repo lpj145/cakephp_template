@@ -28,6 +28,15 @@ bin/cake server -p 8000
 
 Deve esta disponivel em: `http://localhost:8000`
 
+#### Docker
+Antes de rodar este comando configure o `.env` na raiz do projeto, tente apenas renomear `.env.example`
+````bash
+docker-compose up --build
+````
+mariadb - `localhost:${DATABASE_PORT}`
+adminer - `localhost:9200`
+cakeapi - `localhost:9090`
+
 ## Comandos
 
 ````bash
