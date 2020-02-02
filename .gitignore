@@ -6,6 +6,7 @@
 /tmp/*
 /vendor/*
 /.env
+/docker/mariadb
 
 # OS generated files #
 ######################
