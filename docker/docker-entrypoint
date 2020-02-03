@@ -1,0 +1,9 @@
+#!/bin/bash
+set -
+
+echo "Iniciando aplicação"
+echo "Criando banco de dados"
+/var/www/bin/cake install
+echo "Instalação completa"
+echo "Iniciando servidor http"
+apache2-foreground

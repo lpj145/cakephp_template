@@ -1,4 +1,4 @@
-FROM php:7.3-apache
+FROM php:7.4-apache
 
 RUN apt-get update \
 && apt-get install -y libpq-dev libicu-dev \
@@ -12,6 +12,8 @@ RUN php -r "copy('http://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
-COPY ./config/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY ./config/000-default.conf /etc/apache2/sites-available/
 EXPOSE 80
+COPY docker-entrypoint /usr/local/bin/
 WORKDIR /var/www
+ENTRYPOINT [ "/usr/local/bin/docker-entrypoint" ]

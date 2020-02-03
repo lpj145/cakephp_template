@@ -36,7 +36,6 @@ return [
      */
     'Datasources' => [
         'default' => [
-            'port' => env('DATABASE_PORT', 3306),
             /**
              * You can use a DSN string to set the entire configuration
              */

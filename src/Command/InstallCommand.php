@@ -7,6 +7,7 @@ use Cake\Console\Arguments;
 use Cake\Console\Command;
 use Cake\Console\ConsoleIo;
 use Cake\Console\ConsoleOptionParser;
+use Cake\Datasource\ConnectionManager;
 use Migrations\Migrations;
 
 /**
@@ -14,6 +15,18 @@ use Migrations\Migrations;
  */
 class InstallCommand extends Command
 {
+    public function initialize(): void
+    {
+        while(true) {
+            if (ConnectionManager::configured()) {
+                break;
+            }
+            if (ConnectionManager::get('default')->getDriver()->connect()) {
+                break;
+            }
+        }
+    }
+
     /**
      * Hook method for defining this command's option parser.
      *
@@ -40,12 +53,18 @@ class InstallCommand extends Command
      */
     public function execute(Arguments $args, ConsoleIo $io)
     {
-        $io->info('Criando banco de dados...');
+        $io->info('Iniciando instalação de dependencias e criação de banco de dados.');
         $migrateCommand = new Migrations();
+
         if (!$migrateCommand->migrate()) {
             $io->error('Não foi possível criar o banco de dados, por favor, verifique os logs.');
             return null;
         }
         $io->success('Banco de dados criado e atualizado com sucesso!');
+
+        $io->info('Inserindo seeds no banco de dados');
+        if ($migrateCommand->seed()) {
+            $io->success('Seeds inseridas com sucesso no banco de dados');
+        }
     }
 }

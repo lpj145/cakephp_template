@@ -44,5 +44,4 @@ services:
       - database
     depends_on:
       - database
-    command:
-      'bin/cake install'
+    command: ["./wait-for-it.sh", "database:3306"]
