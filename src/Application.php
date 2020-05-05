@@ -77,7 +77,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                 'Authentication.JwtSubject'
             ],
             'authenticators' => [
-                'Authentication.form',
+                'Authentication.Form',
                 'Authentication.Jwt' => [
                     'returnPayload' => false
                 ]
