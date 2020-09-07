@@ -1,0 +1,725 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "SwaggerBake - A MixerAPI Project",
+        "description": "For documentation please review the project [README](https:\/\/github.com\/cnizzardini\/cakephp-swagger-bake) and for\nother great API related packages checkout [MixerAPI](http:\/\/mixerapi.com). To change this text edit your\n`swagger.yaml` file.\n",
+        "license": {
+            "name": "MIT"
+        }
+    },
+    "servers": [
+        {
+            "url": "\/api"
+        }
+    ],
+    "paths": {
+        "\/companies": {
+            "post": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Companies"
+                ],
+                "operationId": "companies:add:post",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application\/x-www-form-urlencoded": {
+                            "schema": {
+                                "description": "Company Entity",
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 60
+                                    },
+                                    "cnpj": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 14
+                                    },
+                                    "ie": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 11
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "maxLength": 40
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "maxLength": 40
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "maxLength": 40
+                                    },
+                                    "active": {
+                                        "type": "boolean",
+                                        "minLength": 1
+                                    },
+                                    "created_at": {
+                                        "type": "timestampfractional",
+                                        "format": "date-time"
+                                    },
+                                    "modified_at": {
+                                        "type": "timestampfractional",
+                                        "format": "date-time"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "description": "Company Entity",
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "format": "uuid",
+                                            "readOnly": true
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 60
+                                        },
+                                        "cnpj": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 14
+                                        },
+                                        "ie": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 11
+                                        },
+                                        "address": {
+                                            "type": "string",
+                                            "maxLength": 40
+                                        },
+                                        "city": {
+                                            "type": "string",
+                                            "maxLength": 40
+                                        },
+                                        "state": {
+                                            "type": "string",
+                                            "maxLength": 40
+                                        },
+                                        "active": {
+                                            "type": "boolean",
+                                            "minLength": 1
+                                        },
+                                        "created_at": {
+                                            "type": "timestampfractional",
+                                            "format": "date-time"
+                                        },
+                                        "modified_at": {
+                                            "type": "timestampfractional",
+                                            "format": "date-time"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_token": []
+                    }
+                ],
+                "deprecated": false
+            },
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Companies"
+                ],
+                "operationId": "companies:index:get",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "description": "",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#\/components\/schemas\/Company"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_token": []
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "\/companies\/{id}": {
+            "delete": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Companies"
+                ],
+                "operationId": "companies:delete:delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "",
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Resource deleted"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_token": []
+                    }
+                ],
+                "deprecated": false
+            },
+            "patch": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Companies"
+                ],
+                "operationId": "companies:edit:patch",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "",
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application\/x-www-form-urlencoded": {
+                            "schema": {
+                                "description": "Company Entity",
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 60
+                                    },
+                                    "cnpj": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 14
+                                    },
+                                    "ie": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 11
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "maxLength": 40
+                                    },
+                                    "city": {
+                                        "type": "string",
+                                        "maxLength": 40
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "maxLength": 40
+                                    },
+                                    "active": {
+                                        "type": "boolean",
+                                        "minLength": 1
+                                    },
+                                    "created_at": {
+                                        "type": "timestampfractional",
+                                        "format": "date-time"
+                                    },
+                                    "modified_at": {
+                                        "type": "timestampfractional",
+                                        "format": "date-time"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "description": "Company Entity",
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "format": "uuid",
+                                            "readOnly": true
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 60
+                                        },
+                                        "cnpj": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 14
+                                        },
+                                        "ie": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 11
+                                        },
+                                        "address": {
+                                            "type": "string",
+                                            "maxLength": 40
+                                        },
+                                        "city": {
+                                            "type": "string",
+                                            "maxLength": 40
+                                        },
+                                        "state": {
+                                            "type": "string",
+                                            "maxLength": 40
+                                        },
+                                        "active": {
+                                            "type": "boolean",
+                                            "minLength": 1
+                                        },
+                                        "created_at": {
+                                            "type": "timestampfractional",
+                                            "format": "date-time"
+                                        },
+                                        "modified_at": {
+                                            "type": "timestampfractional",
+                                            "format": "date-time"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_token": []
+                    }
+                ],
+                "deprecated": false
+            },
+            "get": {
+                "summary": "",
+                "description": "",
+                "tags": [
+                    "Companies"
+                ],
+                "operationId": "companies:view:get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "",
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "description": "Company Entity",
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "format": "uuid",
+                                            "readOnly": true
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 60
+                                        },
+                                        "cnpj": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 14
+                                        },
+                                        "ie": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 11
+                                        },
+                                        "address": {
+                                            "type": "string",
+                                            "maxLength": 40
+                                        },
+                                        "city": {
+                                            "type": "string",
+                                            "maxLength": 40
+                                        },
+                                        "state": {
+                                            "type": "string",
+                                            "maxLength": 40
+                                        },
+                                        "active": {
+                                            "type": "boolean",
+                                            "minLength": 1
+                                        },
+                                        "created_at": {
+                                            "type": "timestampfractional",
+                                            "format": "date-time"
+                                        },
+                                        "modified_at": {
+                                            "type": "timestampfractional",
+                                            "format": "date-time"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "jwt_token": []
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "\/token": {
+            "post": {
+                "summary": "Get token by username (email) and password.",
+                "servers": [
+                    {
+                        "url": "\/"
+                    }
+                ],
+                "operationId": null,
+                "requestBody": {
+                    "$ref": "#\/components\/requestBodies\/UserLogin"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Authentication Successfully.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/UserAuthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated User.",
+                        "content": {
+                            "text\/html": {
+                                "schema": {
+                                    "example": "Authentication failed."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": null,
+    "components": {
+        "securitySchemes": {
+            "jwt_token": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "reponses": {
+            "NotFound": {
+                "description": "Entity not found."
+            },
+            "Unauthenticated": {
+                "description": "Credentials is wrong.",
+                "content": {
+                    "text\/html": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Authenticated": {
+                "description": "Successfully authenticated operation",
+                "content": {
+                    "text\/html": {
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "requestBodies": {
+            "UserLogin": {
+                "content": {
+                    "application\/json": {
+                        "schema": {
+                            "$ref": "#\/components\/schemas\/UserLogin"
+                        }
+                    }
+                }
+            }
+        },
+        "schemas": {
+            "Company": {
+                "description": "Company Entity",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "readOnly": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 60
+                    },
+                    "cnpj": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 14
+                    },
+                    "ie": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 11
+                    },
+                    "address": {
+                        "type": "string",
+                        "maxLength": 40
+                    },
+                    "city": {
+                        "type": "string",
+                        "maxLength": 40
+                    },
+                    "state": {
+                        "type": "string",
+                        "maxLength": 40
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "minLength": 1
+                    },
+                    "created_at": {
+                        "type": "timestampfractional",
+                        "format": "date-time"
+                    },
+                    "modified_at": {
+                        "type": "timestampfractional",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "Exception": {
+                "description": "Error in server.",
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "intege"
+                    }
+                }
+            },
+            "Pagination": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": ""
+                    },
+                    "meta": {
+                        "type": ""
+                    }
+                }
+            },
+            "PaginationData": {
+                "description": "",
+                "type": "array"
+            },
+            "PaginationMeta": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "per_page": {
+                        "type": "integer"
+                    },
+                    "current_page": {
+                        "type": "integer"
+                    },
+                    "last_page": {
+                        "type": "integer"
+                    },
+                    "first_page_url": {
+                        "type": "string"
+                    },
+                    "next_page_url": {
+                        "type": "string"
+                    },
+                    "last_page_url": {
+                        "type": "string"
+                    },
+                    "prev_page_url": {
+                        "type": "string"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "Current resource fetching."
+                    },
+                    "from": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PersistenceFailedException": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "invalids": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array",
+                        "example": "\/url\/path"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Validation Error Message"
+                    }
+                }
+            },
+            "UserAuthenticated": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "token_type": {
+                        "type": "string"
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "JWT TOKEN"
+                    },
+                    "token_expire": {
+                        "type": "integer",
+                        "description": "Future timestamp for token expiration."
+                    },
+                    "data": {
+                        "type": "object",
+                        "description": "Some users data."
+                    }
+                }
+            },
+            "UserLogin": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "email@email.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "password123test"
+                    }
+                }
+            }
+        }
+    },
+    "x-swagger-bake": {
+        "components": {
+            "parameters": {
+                "paginatorPage": {
+                    "name": "page",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                "paginatorLimit": {
+                    "name": "limit",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "integer"
+                    }
+                },
+                "paginatorSort": {
+                    "name": "direction",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                "paginatorDirection": {
+                    "name": "direction",
+                    "in": "query",
+                    "required": false,
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "asc",
+                            "desc"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

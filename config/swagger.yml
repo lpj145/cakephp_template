@@ -1,0 +1,158 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: SwaggerBake - A MixerAPI Project
+  description: |
+    For documentation please review the project [README](https://github.com/cnizzardini/cakephp-swagger-bake) and for
+    other great API related packages checkout [MixerAPI](http://mixerapi.com). To change this text edit your
+    `swagger.yaml` file.
+  license:
+    name: MIT
+servers:
+  - url: /api
+paths:
+  /token:
+    post:
+      summary: Get token by username (email) and password.
+      servers:
+      - url: /
+      operationId:
+      requestBody:
+        $ref: '#/components/requestBodies/UserLogin'
+      responses:
+        200:
+          description: Authentication Successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthenticated'
+        401:
+          description: Unauthenticated User.
+          content:
+            text/html:
+              schema:
+                example:
+                  Authentication failed.
+
+
+definitions:
+
+components:
+  securitySchemes:
+    jwt_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  reponses:
+    NotFound:
+      description: Entity not found.
+    Unauthenticated:
+      description: Credentials is wrong.
+      content:
+        text/html:
+          type: string
+    Authenticated:
+      description: Successfully authenticated operation
+      content:
+        text/html:
+          schema:
+            type: string
+
+  requestBodies:
+    UserLogin:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserLogin'
+  schemas:
+    UserLogin:
+      type: object
+      properties:
+        username:
+          type: string
+          example: email@email.com
+          format: email
+        password:
+          type: string
+          example: password123test
+          format: password
+    UserAuthenticated:
+      type: object
+      properties:
+        token_type:
+          type: string
+        token:
+          type: string
+          description: JWT TOKEN
+        token_expire:
+          type: integer
+          description: Future timestamp for token expiration.
+        data:
+          type: object
+          description: Some users data.
+    Pagination:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PaginationData'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PaginationData:
+      type: array
+      items: {}
+    PaginationMeta:
+      type: object
+      nullable: true
+      properties:
+        per_page:
+          type: integer
+          nullable: true
+        current_page:
+          type: integer
+          nullable: true
+        last_page:
+          type: integer
+          nullable: true
+        first_page_url:
+          nullable: true
+          type: string
+        next_page_url:
+          nullable: true
+          type: string
+        last_page_url:
+          nullable: true
+          type: string
+        prev_page_url:
+          type: string
+          nullable: true
+        path:
+          type: string
+          nullable: true
+          description: Current resource fetching.
+        from:
+          type: string
+          nullable: true
+        to:
+          type: string
+          nullable: true
+    PersistenceFailedException:
+      type: object
+      properties:
+        invalids:
+          type: array
+        errors:
+          type: array
+          example: /url/path
+        message:
+          type: string
+          example: Validation Error Message
+      json:
+        name: response
+    Exception:
+      description: Error in server.
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: intege
