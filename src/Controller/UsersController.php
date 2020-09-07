@@ -7,6 +7,7 @@ use App\Model\Entity\User;
 use Cake\Event\EventInterface;
 use Cake\Http\Response;
 use Cake\Utility\Security;
+use Firebase\JWT\JWT;
 
 /**
  * Users Controller
